@@ -344,19 +344,21 @@ window.ALE_TRACKING = {
   .loc-row p{ margin:0; font-size:0.9rem; color:var(--mist); line-height:1.55; font-weight:500; }
   .loc-row a{ color:var(--cyan); text-decoration:none; font-weight:700; }
   .loc-row a:hover{ text-decoration:underline; }
-  .loc-map-art{
+  .loc-map{
     position:relative; border-radius:var(--radius); overflow:hidden; aspect-ratio:1/1;
-    background:
-      radial-gradient(circle at 50% 42%, rgba(0,191,255,0.18), transparent 55%),
-      repeating-linear-gradient(0deg, rgba(185,202,202,0.06) 0 1px, transparent 1px 42px),
-      repeating-linear-gradient(90deg, rgba(185,202,202,0.06) 0 1px, transparent 1px 42px),
-      var(--ink2);
-    border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center;
+    background:var(--ink2); border:1px solid var(--line);
+    box-shadow:0 20px 40px -26px rgba(0,0,0,0.65);
   }
-  .loc-pin{ display:flex; flex-direction:column; align-items:center; gap:14px; }
-  .loc-pin svg{ width:56px; height:56px; color:var(--cyan); filter:drop-shadow(0 8px 20px rgba(0,191,255,0.5)); }
-  .loc-pin span{ font-family:var(--ff-body); font-weight:800; font-size:0.8rem; letter-spacing:0.06em; color:var(--mist); text-align:center; padding:0 30px; }
+  .loc-map iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+  .loc-map-btn{
+    position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
+    display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+    background:var(--cyan); color:var(--black); text-decoration:none;
+    font-family:var(--ff-body); font-weight:800; font-size:0.82rem; letter-spacing:0.04em;
+    padding:12px 20px; border-radius:999px; box-shadow:0 10px 24px -8px rgba(0,0,0,0.6);
+  }
+  .loc-map-btn svg{ width:18px; height:18px; }
+  .loc-map-btn:hover{ filter:brightness(1.08); }
 
   /* ---------- CTA BAND ---------- */
   .cta-band{
@@ -381,6 +383,13 @@ window.ALE_TRACKING = {
   .foot-col h5{ font-family:var(--ff-body); font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--mist-dim); margin:0 0 12px 0; }
   .foot-col p, .foot-col a{ font-size:0.88rem; color:var(--mist); line-height:1.7; font-weight:600; text-decoration:none; display:block; }
   .foot-col a:hover{ color:var(--cyan); }
+  .foot-col a.foot-social{
+    display:inline-flex; align-items:center; justify-content:center; margin-top:10px;
+    width:40px; height:40px; border-radius:12px; border:1px solid var(--line); color:var(--mist);
+    transition:color .2s, border-color .2s, background .2s;
+  }
+  .foot-col a.foot-social svg{ width:22px; height:22px; }
+  .foot-col a.foot-social:hover{ color:var(--cyan); border-color:var(--cyan); background:rgba(0,191,255,0.08); }
   .foot-bottom{ margin-top:44px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; color:var(--mist-dim); font-size:0.78rem; font-weight:600; }
 
   /* ---------- FLOATING WHATSAPP ---------- */
@@ -634,12 +643,13 @@ window.ALE_TRACKING = {
           <div><h4>Avaliação</h4><p>5,0 de nota média em +720 avaliações no Google.</p></div>
         </div>
       </div>
-      <a class="loc-map-art reveal" href="https://maps.app.goo.gl/bJtXcpoCcK1VZVMi6" target="_blank" rel="noopener" aria-label="Ver rota no Google Maps">
-        <div class="loc-pin">
+      <div class="loc-map reveal">
+        <iframe src="https://www.google.com/maps?q=R.+Sen.+Queir%C3%B3s,+115+-+Vila+Scarpelli,+Santo+Andr%C3%A9+-+SP,+09050-300&z=16&hl=pt-BR&output=embed" title="Mapa: ALE Higienização – R. Sen. Queirós, 115, Santo André" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <a class="loc-map-btn" href="https://maps.app.goo.gl/bJtXcpoCcK1VZVMi6" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 2 3 6 3 11c0 6.6 8.2 10.6 8.6 10.8a1 1 0 0 0 .8 0C12.8 21.6 21 17.6 21 11c0-5-4-9-9-9zm0 12.5A3.5 3.5 0 1 1 12 7.5a3.5 3.5 0 0 1 0 7z"/></svg>
-          <span>VILA SCARPELLI, SANTO ANDRÉ – SP<br>TOQUE PARA VER A ROTA</span>
-        </div>
-      </a>
+          Como chegar
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -654,7 +664,9 @@ window.ALE_TRACKING = {
       <div class="foot-col">
         <h5>Contato</h5>
         <a href="https://wa.me/5511982546983" target="_blank" rel="noopener">(11) 98254-6983</a>
-        <a href="https://instagram.com/ale_higienizacao" target="_blank" rel="noopener">@ale_higienizacao</a>
+        <a class="foot-social" href="https://www.instagram.com/lavagem_de_bancos_automotivos/" target="_blank" rel="noopener" aria-label="Instagram da ALE Higienização" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="0.6" fill="currentColor" stroke="none"/></svg>
+        </a>
       </div>
       <div class="foot-col">
         <h5>Endereço</h5>
